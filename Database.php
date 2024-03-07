@@ -17,8 +17,8 @@ class Database{
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]);
     }
-
-    public function query($query, $params = []){
+    
+    public function query($query, $params = []){ // $params is an array containing user input (e.g. $_GET['id']; )
 
         $statement = $this->connection->prepare($query);
         $statement->execute($params); // binds $params array element(s) to the SQL query with '?' to prevent SQL injection vulnerability
