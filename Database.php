@@ -14,14 +14,14 @@ class Database{
 
         //the 4th argument means that the FETCH_ASSOC will be applied to all of the output of the query
         $this->connection = new PDO($dsn, $username, $password, [
-            PDO::ATTR_DEFAULT_FETCH_MODE => pdo::FETCH_ASSOC
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]);
     }
 
-    public function query($query){
+    public function query($query, $params = []){
 
         $statement = $this->connection->prepare($query);
-        $statement->execute();
+        $statement->execute($params); // binds $params array element(s) to the SQL query with '?' to prevent SQL injection vulnerability
         
         return $statement;
     }
